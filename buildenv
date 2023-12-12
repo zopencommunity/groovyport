@@ -35,9 +35,10 @@ export ZOPEN_INSTALL="zopen_groovy_install"
 
 zopen_groovy_install()
 {
-  mkdir -p "$ZOPEN_INSTALL_DIR/bin" "$ZOPEN_INSTALL_DIR/lib"
-  cp -r "$PWD/bin" "$ZOPEN_INSTALL_DIR/bin/"
-  cp -r "$PWD/lib" "$ZOPEN_INSTALL_DIR/lib/"
+  mkdir -p "$ZOPEN_INSTALL_DIR/bin" "$ZOPEN_INSTALL_DIR/lib" "$ZOPEN_INSTALL_DIR/conf"
+  cp -r "$PWD/bin/" "$ZOPEN_INSTALL_DIR/bin/"
+  cp -r "$PWD/lib/" "$ZOPEN_INSTALL_DIR/lib/"
+  cp -r "$PWD/conf/" "$ZOPEN_INSTALL_DIR/conf/"
   return 0
 }
 
