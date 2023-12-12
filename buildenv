@@ -1,7 +1,7 @@
 export ZOPEN_STABLE_URL="https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-4.0.12.zip"
-export ZOPEN_STABLE_DEPS="java"
+export ZOPEN_STABLE_DEPS="java bash"
 export ZOPEN_BUILD_LINE="STABLE"
-export ZOPEN_RUNTIME_DEPS="java"
+export ZOPEN_RUNTIME_DEPS="java bash"
 export ZOPEN_CATEGORIES="language"
 
 export ZOPEN_NAME="groovy"
@@ -36,7 +36,8 @@ export ZOPEN_INSTALL="zopen_groovy_install"
 zopen_groovy_install()
 {
   mkdir -p "$ZOPEN_INSTALL_DIR/bin" "$ZOPEN_INSTALL_DIR/lib"
-  cp -r "$PWD" "$ZOPEN_INSTALL_DIR/"
+  cp -r "$PWD/bin" "$ZOPEN_INSTALL_DIR/bin/"
+  cp -r "$PWD/lib" "$ZOPEN_INSTALL_DIR/lib/"
   return 0
 }
 
@@ -49,6 +50,7 @@ ZZ
 
 zopen_get_version()
 {
+  GROOVY_DIR=$PWD
   export JAVA_HOME=$(dirname $(dirname $(/bin/type java | awk ' { print $3; }')))
-  bin/groovy --version 2>&1 | head -1 | awk ' { print $3; } '
+  bash "$GROOVY_DIR/bin/groovy" --version 2>&1 | head -1 | awk ' { print $3; } '
 }
