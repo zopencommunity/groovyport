@@ -4,22 +4,51 @@ export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_RUNTIME_DEPS="java"
 export ZOPEN_CATEGORIES="language"
 
+export ZOPEN_NAME="groovy"
+
+rm -f apache-groovy-binary-4.0.12
+ln -s groovy-4.0.12 apache-groovy-binary-4.0.12
+
 zopen_check_results()
 {
   dir="$1"
   pfx="$2"
   chk="$1/$2_check.log"
 
-  # Echo the following information to gauge build health
+  # Needs to be enhanced with tests
   echo "actualFailures:0"
   echo "totalTests:1"
   echo "expectedFailures:0"
   echo "expectedTotalTests:1"
 }
 
+export ZOPEN_CONFIGURE="skip"
+export ZOPEN_CONFIGURE_OPTS=""
+
+export ZOPEN_MAKE="skip"
+export ZOPEN_MAKE_OPTS=""
+
+export ZOPEN_CHECK="skip"
+export ZOPEN_CHECK_OPTS=""
+
+export ZOPEN_INSTALL="zopen_groovy_install"
+
+zopen_groovy_install()
+{
+  mkdir -p "$ZOPEN_INSTALL_DIR/bin" "$ZOPEN_INSTALL_DIR/lib"
+  cp -r "$PWD" "$ZOPEN_INSTALL_DIR/"
+  return 0
+}
+
+zopen_append_to_env()
+{
+cat <<ZZ
+GROOVY_HOME="\$PWD"
+ZZ
+}
+
 zopen_get_version()
 {
-  # Modify to echo the version of your tool/library
-  # Rather than hardcoding the version, obtain the version by running the tool/library
-  echo "1.0.0"
+  export JAVA_HOME=$(dirname $(dirname $(/bin/type java | awk ' { print $3; }')))
+  bin/groovy --version 2>&1 | head -1 | awk ' { print $3; } '
 }
