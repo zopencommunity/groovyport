@@ -1,13 +1,16 @@
-export ZOPEN_STABLE_URL="https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-4.0.12.zip"
-export ZOPEN_STABLE_DEPS="java bash"
+# bump: groovy-version /GROOVY_VERSION="(.*)"/ https://groovy.apache.org/download.html|re:/Download.([\d.]+)/$1/
+GROOVY_VERSION="4.0.12"
+
 export ZOPEN_BUILD_LINE="STABLE"
+export ZOPEN_STABLE_URL="https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-${GROOVY_VERSION}.zip"
+export ZOPEN_STABLE_DEPS="java bash"
 export ZOPEN_RUNTIME_DEPS="java bash"
 export ZOPEN_CATEGORIES="language"
 
 export ZOPEN_NAME="groovy"
 
-rm -f apache-groovy-binary-4.0.12
-ln -s groovy-4.0.12 apache-groovy-binary-4.0.12
+rm -f "apache-groovy-binary-${GROOVY_VERSION}"
+ln -s "groovy-${GROOVY_VERSION}" "apache-groovy-binary-${GROOVY_VERSION}"
 
 zopen_check_results()
 {
