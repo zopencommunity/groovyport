@@ -1,5 +1,5 @@
 # bump: groovy-version /GROOVY_VERSION="(.*)"/ https://groovy.apache.org/download.html|re:/Download.([\d.]+)/$1/
-GROOVY_VERSION="4.0.18"
+GROOVY_VERSION="4.0.22"
 
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_STABLE_URL="https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-${GROOVY_VERSION}.zip"
