@@ -1,5 +1,5 @@
 # bump: groovy-version /GROOVY_VERSION="(.*)"/ https://groovy.apache.org/download.html|re:/Download.([\d.]+)/$1/
-GROOVY_VERSION="4.0.25"
+GROOVY_VERSION="4.0.26"
 
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_STABLE_URL="https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-${GROOVY_VERSION}.zip"
@@ -57,4 +57,10 @@ zopen_get_version()
   GROOVY_DIR=$PWD
   export JAVA_HOME=$(dirname $(dirname $(/bin/type java | awk ' { print $3; }')))
   bash "$GROOVY_DIR/bin/groovy" --version 2>&1 | head -1 | awk ' { print $3; } '
+}
+
+zopen_post_extract()
+{
+   echo $PWD
+   chtag -R -tc 819 groovy-$GROOVY_VERSION
 }
