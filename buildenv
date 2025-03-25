@@ -61,6 +61,5 @@ zopen_get_version()
 
 zopen_post_extract()
 {
-   echo $PWD
    chtag -R -tc 819 groovy-$GROOVY_VERSION
 }
